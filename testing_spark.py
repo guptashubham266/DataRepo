@@ -22,5 +22,5 @@ sorted_df = grouped_df.sort("avg_salary", ascending=False)
 # Select top 3 departments
 top3_df = sorted_df.limit(3)
 
-# Write result to Parquet
-top3_df.write.parquet("output/top_departments.parquet")
+# Write result to ORC
+top3_df.write.orc("output/top_departments.orc")
