@@ -1,7 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, avg
 
-some dummy line
 # Create SparkSession
 spark = SparkSession.builder.appName("Employee Salary Analysis").getOrCreate()
 
