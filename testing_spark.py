@@ -1,11 +1,20 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, avg
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 
 # Create SparkSession
 spark = SparkSession.builder.appName("Employee Salary Analysis").getOrCreate()
 
-# Read the employee CSV file
-df = spark.read.option("header", True).csv("employee_data.csv")
+# Define schema for the CSV file
+schema = StructType([
+    StructField("employee_id", StringType(), True),
+    StructField("joining_date", StringType(), True),
+    StructField("department", StringType(), True),
+    StructField("salary", StringType(), True)
+])
+
+# Read the employee CSV file with schema validation
+df = spark.read.option("header", True).schema(schema).csv("employee_data.csv")
 
 # Filter employees who joined after 2020-01-01
 filtered_df = df.filter(df["joining_date"] > "2020-01-01")
